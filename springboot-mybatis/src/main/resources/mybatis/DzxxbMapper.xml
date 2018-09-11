@@ -1,0 +1,546 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.DzxxbMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.entity.Dzxxb" >
+    <id column="标识列" property="标识列" jdbcType="INTEGER" />
+    <result column="读者证号" property="读者证号" jdbcType="CHAR" />
+    <result column="读者姓名" property="读者姓名" jdbcType="CHAR" />
+    <result column="读者性别" property="读者性别" jdbcType="CHAR" />
+    <result column="读者单位" property="读者单位" jdbcType="CHAR" />
+    <result column="读者类别" property="读者类别" jdbcType="CHAR" />
+    <result column="读者身份" property="读者身份" jdbcType="CHAR" />
+    <result column="读者口令" property="读者口令" jdbcType="CHAR" />
+    <result column="出生日期" property="出生日期" jdbcType="CHAR" />
+    <result column="办证日期" property="办证日期" jdbcType="CHAR" />
+    <result column="终止日期" property="终止日期" jdbcType="CHAR" />
+    <result column="邮政编码" property="邮政编码" jdbcType="CHAR" />
+    <result column="地址" property="地址" jdbcType="CHAR" />
+    <result column="电话" property="电话" jdbcType="CHAR" />
+    <result column="email" property="email" jdbcType="CHAR" />
+    <result column="允借册数" property="允借册数" jdbcType="INTEGER" />
+    <result column="借出册数" property="借出册数" jdbcType="INTEGER" />
+    <result column="状态位" property="状态位" jdbcType="CHAR" />
+    <result column="预约资格" property="预约资格" jdbcType="BIT" />
+    <result column="馆际互借" property="馆际互借" jdbcType="BIT" />
+    <result column="停借日期" property="停借日期" jdbcType="CHAR" />
+    <result column="停借天数" property="停借天数" jdbcType="INTEGER" />
+    <result column="图书馆代码" property="图书馆代码" jdbcType="CHAR" />
+    <result column="图书馆名称" property="图书馆名称" jdbcType="CHAR" />
+    <result column="更新时间" property="更新时间" jdbcType="TIMESTAMP" />
+    <result column="身份证号" property="身份证号" jdbcType="CHAR" />
+    <result column="职业行业" property="职业行业" jdbcType="CHAR" />
+    <result column="文化程度" property="文化程度" jdbcType="CHAR" />
+    <result column="业务职称" property="业务职称" jdbcType="CHAR" />
+    <result column="备注" property="备注" jdbcType="CHAR" />
+    <result column="停借原因" property="停借原因" jdbcType="CHAR" />
+    <result column="停借操作员" property="停借操作员" jdbcType="CHAR" />
+    <result column="卡号" property="卡号" jdbcType="CHAR" />
+    <result column="预借资格" property="预借资格" jdbcType="BIT" />
+    <result column="读者签名" property="读者签名" jdbcType="CHAR" />
+    <result column="读者流水号" property="读者流水号" jdbcType="CHAR" />
+    <result column="SCHOOLID" property="schoolid" jdbcType="NVARCHAR" />
+    <result column="EDITFLAG" property="editflag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.yh.entity.DzxxbWithBLOBs" extends="BaseResultMap" >
+    <result column="读者照片" property="读者照片" jdbcType="LONGVARBINARY" />
+    <result column="喜欢类目" property="喜欢类目" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    标识列, 读者证号, 读者姓名, 读者性别, 读者单位, 读者类别, 读者身份, 读者口令, 出生日期, 办证日期, 终止日期, 邮政编码, 地址, 电话, email, 
+    允借册数, 借出册数, 状态位, 预约资格, 馆际互借, 停借日期, 停借天数, 图书馆代码, 图书馆名称, 更新时间, 身份证号, 职业行业, 文化程度, 业务职称, 
+    备注, 停借原因, 停借操作员, 卡号, 预借资格, 读者签名, 读者流水号, SCHOOLID, EDITFLAG
+  </sql>
+  <sql id="Blob_Column_List" >
+    读者照片, 喜欢类目
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from dzxxb
+    where 标识列 = #{标识列,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from dzxxb
+    where 标识列 = #{标识列,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.yh.entity.DzxxbWithBLOBs" >
+    insert into dzxxb (标识列, 读者证号, 读者姓名, 读者性别, 
+      读者单位, 读者类别, 读者身份, 读者口令, 
+      出生日期, 办证日期, 终止日期, 邮政编码, 
+      地址, 电话, email, 允借册数, 
+      借出册数, 状态位, 预约资格, 馆际互借, 
+      停借日期, 停借天数, 图书馆代码, 图书馆名称, 
+      更新时间, 身份证号, 职业行业, 文化程度, 
+      业务职称, 备注, 停借原因, 停借操作员, 
+      卡号, 预借资格, 读者签名, 读者流水号, 
+      SCHOOLID, EDITFLAG, 读者照片, 
+      喜欢类目)
+    values (#{标识列,jdbcType=INTEGER}, #{读者证号,jdbcType=CHAR}, #{读者姓名,jdbcType=CHAR}, #{读者性别,jdbcType=CHAR}, 
+      #{读者单位,jdbcType=CHAR}, #{读者类别,jdbcType=CHAR}, #{读者身份,jdbcType=CHAR}, #{读者口令,jdbcType=CHAR}, 
+      #{出生日期,jdbcType=CHAR}, #{办证日期,jdbcType=CHAR}, #{终止日期,jdbcType=CHAR}, #{邮政编码,jdbcType=CHAR}, 
+      #{地址,jdbcType=CHAR}, #{电话,jdbcType=CHAR}, #{email,jdbcType=CHAR}, #{允借册数,jdbcType=INTEGER}, 
+      #{借出册数,jdbcType=INTEGER}, #{状态位,jdbcType=CHAR}, #{预约资格,jdbcType=BIT}, #{馆际互借,jdbcType=BIT}, 
+      #{停借日期,jdbcType=CHAR}, #{停借天数,jdbcType=INTEGER}, #{图书馆代码,jdbcType=CHAR}, #{图书馆名称,jdbcType=CHAR}, 
+      #{更新时间,jdbcType=TIMESTAMP}, #{身份证号,jdbcType=CHAR}, #{职业行业,jdbcType=CHAR}, #{文化程度,jdbcType=CHAR}, 
+      #{业务职称,jdbcType=CHAR}, #{备注,jdbcType=CHAR}, #{停借原因,jdbcType=CHAR}, #{停借操作员,jdbcType=CHAR}, 
+      #{卡号,jdbcType=CHAR}, #{预借资格,jdbcType=BIT}, #{读者签名,jdbcType=CHAR}, #{读者流水号,jdbcType=CHAR}, 
+      #{schoolid,jdbcType=NVARCHAR}, #{editflag,jdbcType=CHAR}, #{读者照片,jdbcType=LONGVARBINARY}, 
+      #{喜欢类目,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.entity.DzxxbWithBLOBs" >
+    insert into dzxxb
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="标识列 != null" >
+        标识列,
+      </if>
+      <if test="读者证号 != null" >
+        读者证号,
+      </if>
+      <if test="读者姓名 != null" >
+        读者姓名,
+      </if>
+      <if test="读者性别 != null" >
+        读者性别,
+      </if>
+      <if test="读者单位 != null" >
+        读者单位,
+      </if>
+      <if test="读者类别 != null" >
+        读者类别,
+      </if>
+      <if test="读者身份 != null" >
+        读者身份,
+      </if>
+      <if test="读者口令 != null" >
+        读者口令,
+      </if>
+      <if test="出生日期 != null" >
+        出生日期,
+      </if>
+      <if test="办证日期 != null" >
+        办证日期,
+      </if>
+      <if test="终止日期 != null" >
+        终止日期,
+      </if>
+      <if test="邮政编码 != null" >
+        邮政编码,
+      </if>
+      <if test="地址 != null" >
+        地址,
+      </if>
+      <if test="电话 != null" >
+        电话,
+      </if>
+      <if test="email != null" >
+        email,
+      </if>
+      <if test="允借册数 != null" >
+        允借册数,
+      </if>
+      <if test="借出册数 != null" >
+        借出册数,
+      </if>
+      <if test="状态位 != null" >
+        状态位,
+      </if>
+      <if test="预约资格 != null" >
+        预约资格,
+      </if>
+      <if test="馆际互借 != null" >
+        馆际互借,
+      </if>
+      <if test="停借日期 != null" >
+        停借日期,
+      </if>
+      <if test="停借天数 != null" >
+        停借天数,
+      </if>
+      <if test="图书馆代码 != null" >
+        图书馆代码,
+      </if>
+      <if test="图书馆名称 != null" >
+        图书馆名称,
+      </if>
+      <if test="更新时间 != null" >
+        更新时间,
+      </if>
+      <if test="身份证号 != null" >
+        身份证号,
+      </if>
+      <if test="职业行业 != null" >
+        职业行业,
+      </if>
+      <if test="文化程度 != null" >
+        文化程度,
+      </if>
+      <if test="业务职称 != null" >
+        业务职称,
+      </if>
+      <if test="备注 != null" >
+        备注,
+      </if>
+      <if test="停借原因 != null" >
+        停借原因,
+      </if>
+      <if test="停借操作员 != null" >
+        停借操作员,
+      </if>
+      <if test="卡号 != null" >
+        卡号,
+      </if>
+      <if test="预借资格 != null" >
+        预借资格,
+      </if>
+      <if test="读者签名 != null" >
+        读者签名,
+      </if>
+      <if test="读者流水号 != null" >
+        读者流水号,
+      </if>
+      <if test="schoolid != null" >
+        SCHOOLID,
+      </if>
+      <if test="editflag != null" >
+        EDITFLAG,
+      </if>
+      <if test="读者照片 != null" >
+        读者照片,
+      </if>
+      <if test="喜欢类目 != null" >
+        喜欢类目,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="标识列 != null" >
+        #{标识列,jdbcType=INTEGER},
+      </if>
+      <if test="读者证号 != null" >
+        #{读者证号,jdbcType=CHAR},
+      </if>
+      <if test="读者姓名 != null" >
+        #{读者姓名,jdbcType=CHAR},
+      </if>
+      <if test="读者性别 != null" >
+        #{读者性别,jdbcType=CHAR},
+      </if>
+      <if test="读者单位 != null" >
+        #{读者单位,jdbcType=CHAR},
+      </if>
+      <if test="读者类别 != null" >
+        #{读者类别,jdbcType=CHAR},
+      </if>
+      <if test="读者身份 != null" >
+        #{读者身份,jdbcType=CHAR},
+      </if>
+      <if test="读者口令 != null" >
+        #{读者口令,jdbcType=CHAR},
+      </if>
+      <if test="出生日期 != null" >
+        #{出生日期,jdbcType=CHAR},
+      </if>
+      <if test="办证日期 != null" >
+        #{办证日期,jdbcType=CHAR},
+      </if>
+      <if test="终止日期 != null" >
+        #{终止日期,jdbcType=CHAR},
+      </if>
+      <if test="邮政编码 != null" >
+        #{邮政编码,jdbcType=CHAR},
+      </if>
+      <if test="地址 != null" >
+        #{地址,jdbcType=CHAR},
+      </if>
+      <if test="电话 != null" >
+        #{电话,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=CHAR},
+      </if>
+      <if test="允借册数 != null" >
+        #{允借册数,jdbcType=INTEGER},
+      </if>
+      <if test="借出册数 != null" >
+        #{借出册数,jdbcType=INTEGER},
+      </if>
+      <if test="状态位 != null" >
+        #{状态位,jdbcType=CHAR},
+      </if>
+      <if test="预约资格 != null" >
+        #{预约资格,jdbcType=BIT},
+      </if>
+      <if test="馆际互借 != null" >
+        #{馆际互借,jdbcType=BIT},
+      </if>
+      <if test="停借日期 != null" >
+        #{停借日期,jdbcType=CHAR},
+      </if>
+      <if test="停借天数 != null" >
+        #{停借天数,jdbcType=INTEGER},
+      </if>
+      <if test="图书馆代码 != null" >
+        #{图书馆代码,jdbcType=CHAR},
+      </if>
+      <if test="图书馆名称 != null" >
+        #{图书馆名称,jdbcType=CHAR},
+      </if>
+      <if test="更新时间 != null" >
+        #{更新时间,jdbcType=TIMESTAMP},
+      </if>
+      <if test="身份证号 != null" >
+        #{身份证号,jdbcType=CHAR},
+      </if>
+      <if test="职业行业 != null" >
+        #{职业行业,jdbcType=CHAR},
+      </if>
+      <if test="文化程度 != null" >
+        #{文化程度,jdbcType=CHAR},
+      </if>
+      <if test="业务职称 != null" >
+        #{业务职称,jdbcType=CHAR},
+      </if>
+      <if test="备注 != null" >
+        #{备注,jdbcType=CHAR},
+      </if>
+      <if test="停借原因 != null" >
+        #{停借原因,jdbcType=CHAR},
+      </if>
+      <if test="停借操作员 != null" >
+        #{停借操作员,jdbcType=CHAR},
+      </if>
+      <if test="卡号 != null" >
+        #{卡号,jdbcType=CHAR},
+      </if>
+      <if test="预借资格 != null" >
+        #{预借资格,jdbcType=BIT},
+      </if>
+      <if test="读者签名 != null" >
+        #{读者签名,jdbcType=CHAR},
+      </if>
+      <if test="读者流水号 != null" >
+        #{读者流水号,jdbcType=CHAR},
+      </if>
+      <if test="schoolid != null" >
+        #{schoolid,jdbcType=NVARCHAR},
+      </if>
+      <if test="editflag != null" >
+        #{editflag,jdbcType=CHAR},
+      </if>
+      <if test="读者照片 != null" >
+        #{读者照片,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="喜欢类目 != null" >
+        #{喜欢类目,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.entity.DzxxbWithBLOBs" >
+    update dzxxb
+    <set >
+      <if test="读者证号 != null" >
+        读者证号 = #{读者证号,jdbcType=CHAR},
+      </if>
+      <if test="读者姓名 != null" >
+        读者姓名 = #{读者姓名,jdbcType=CHAR},
+      </if>
+      <if test="读者性别 != null" >
+        读者性别 = #{读者性别,jdbcType=CHAR},
+      </if>
+      <if test="读者单位 != null" >
+        读者单位 = #{读者单位,jdbcType=CHAR},
+      </if>
+      <if test="读者类别 != null" >
+        读者类别 = #{读者类别,jdbcType=CHAR},
+      </if>
+      <if test="读者身份 != null" >
+        读者身份 = #{读者身份,jdbcType=CHAR},
+      </if>
+      <if test="读者口令 != null" >
+        读者口令 = #{读者口令,jdbcType=CHAR},
+      </if>
+      <if test="出生日期 != null" >
+        出生日期 = #{出生日期,jdbcType=CHAR},
+      </if>
+      <if test="办证日期 != null" >
+        办证日期 = #{办证日期,jdbcType=CHAR},
+      </if>
+      <if test="终止日期 != null" >
+        终止日期 = #{终止日期,jdbcType=CHAR},
+      </if>
+      <if test="邮政编码 != null" >
+        邮政编码 = #{邮政编码,jdbcType=CHAR},
+      </if>
+      <if test="地址 != null" >
+        地址 = #{地址,jdbcType=CHAR},
+      </if>
+      <if test="电话 != null" >
+        电话 = #{电话,jdbcType=CHAR},
+      </if>
+      <if test="email != null" >
+        email = #{email,jdbcType=CHAR},
+      </if>
+      <if test="允借册数 != null" >
+        允借册数 = #{允借册数,jdbcType=INTEGER},
+      </if>
+      <if test="借出册数 != null" >
+        借出册数 = #{借出册数,jdbcType=INTEGER},
+      </if>
+      <if test="状态位 != null" >
+        状态位 = #{状态位,jdbcType=CHAR},
+      </if>
+      <if test="预约资格 != null" >
+        预约资格 = #{预约资格,jdbcType=BIT},
+      </if>
+      <if test="馆际互借 != null" >
+        馆际互借 = #{馆际互借,jdbcType=BIT},
+      </if>
+      <if test="停借日期 != null" >
+        停借日期 = #{停借日期,jdbcType=CHAR},
+      </if>
+      <if test="停借天数 != null" >
+        停借天数 = #{停借天数,jdbcType=INTEGER},
+      </if>
+      <if test="图书馆代码 != null" >
+        图书馆代码 = #{图书馆代码,jdbcType=CHAR},
+      </if>
+      <if test="图书馆名称 != null" >
+        图书馆名称 = #{图书馆名称,jdbcType=CHAR},
+      </if>
+      <if test="更新时间 != null" >
+        更新时间 = #{更新时间,jdbcType=TIMESTAMP},
+      </if>
+      <if test="身份证号 != null" >
+        身份证号 = #{身份证号,jdbcType=CHAR},
+      </if>
+      <if test="职业行业 != null" >
+        职业行业 = #{职业行业,jdbcType=CHAR},
+      </if>
+      <if test="文化程度 != null" >
+        文化程度 = #{文化程度,jdbcType=CHAR},
+      </if>
+      <if test="业务职称 != null" >
+        业务职称 = #{业务职称,jdbcType=CHAR},
+      </if>
+      <if test="备注 != null" >
+        备注 = #{备注,jdbcType=CHAR},
+      </if>
+      <if test="停借原因 != null" >
+        停借原因 = #{停借原因,jdbcType=CHAR},
+      </if>
+      <if test="停借操作员 != null" >
+        停借操作员 = #{停借操作员,jdbcType=CHAR},
+      </if>
+      <if test="卡号 != null" >
+        卡号 = #{卡号,jdbcType=CHAR},
+      </if>
+      <if test="预借资格 != null" >
+        预借资格 = #{预借资格,jdbcType=BIT},
+      </if>
+      <if test="读者签名 != null" >
+        读者签名 = #{读者签名,jdbcType=CHAR},
+      </if>
+      <if test="读者流水号 != null" >
+        读者流水号 = #{读者流水号,jdbcType=CHAR},
+      </if>
+      <if test="schoolid != null" >
+        SCHOOLID = #{schoolid,jdbcType=NVARCHAR},
+      </if>
+      <if test="editflag != null" >
+        EDITFLAG = #{editflag,jdbcType=CHAR},
+      </if>
+      <if test="读者照片 != null" >
+        读者照片 = #{读者照片,jdbcType=LONGVARBINARY},
+      </if>
+      <if test="喜欢类目 != null" >
+        喜欢类目 = #{喜欢类目,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where 标识列 = #{标识列,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.yh.entity.DzxxbWithBLOBs" >
+    update dzxxb
+    set 读者证号 = #{读者证号,jdbcType=CHAR},
+      读者姓名 = #{读者姓名,jdbcType=CHAR},
+      读者性别 = #{读者性别,jdbcType=CHAR},
+      读者单位 = #{读者单位,jdbcType=CHAR},
+      读者类别 = #{读者类别,jdbcType=CHAR},
+      读者身份 = #{读者身份,jdbcType=CHAR},
+      读者口令 = #{读者口令,jdbcType=CHAR},
+      出生日期 = #{出生日期,jdbcType=CHAR},
+      办证日期 = #{办证日期,jdbcType=CHAR},
+      终止日期 = #{终止日期,jdbcType=CHAR},
+      邮政编码 = #{邮政编码,jdbcType=CHAR},
+      地址 = #{地址,jdbcType=CHAR},
+      电话 = #{电话,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      允借册数 = #{允借册数,jdbcType=INTEGER},
+      借出册数 = #{借出册数,jdbcType=INTEGER},
+      状态位 = #{状态位,jdbcType=CHAR},
+      预约资格 = #{预约资格,jdbcType=BIT},
+      馆际互借 = #{馆际互借,jdbcType=BIT},
+      停借日期 = #{停借日期,jdbcType=CHAR},
+      停借天数 = #{停借天数,jdbcType=INTEGER},
+      图书馆代码 = #{图书馆代码,jdbcType=CHAR},
+      图书馆名称 = #{图书馆名称,jdbcType=CHAR},
+      更新时间 = #{更新时间,jdbcType=TIMESTAMP},
+      身份证号 = #{身份证号,jdbcType=CHAR},
+      职业行业 = #{职业行业,jdbcType=CHAR},
+      文化程度 = #{文化程度,jdbcType=CHAR},
+      业务职称 = #{业务职称,jdbcType=CHAR},
+      备注 = #{备注,jdbcType=CHAR},
+      停借原因 = #{停借原因,jdbcType=CHAR},
+      停借操作员 = #{停借操作员,jdbcType=CHAR},
+      卡号 = #{卡号,jdbcType=CHAR},
+      预借资格 = #{预借资格,jdbcType=BIT},
+      读者签名 = #{读者签名,jdbcType=CHAR},
+      读者流水号 = #{读者流水号,jdbcType=CHAR},
+      SCHOOLID = #{schoolid,jdbcType=NVARCHAR},
+      EDITFLAG = #{editflag,jdbcType=CHAR},
+      读者照片 = #{读者照片,jdbcType=LONGVARBINARY},
+      喜欢类目 = #{喜欢类目,jdbcType=LONGVARCHAR}
+    where 标识列 = #{标识列,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.entity.Dzxxb" >
+    update dzxxb
+    set 读者证号 = #{读者证号,jdbcType=CHAR},
+      读者姓名 = #{读者姓名,jdbcType=CHAR},
+      读者性别 = #{读者性别,jdbcType=CHAR},
+      读者单位 = #{读者单位,jdbcType=CHAR},
+      读者类别 = #{读者类别,jdbcType=CHAR},
+      读者身份 = #{读者身份,jdbcType=CHAR},
+      读者口令 = #{读者口令,jdbcType=CHAR},
+      出生日期 = #{出生日期,jdbcType=CHAR},
+      办证日期 = #{办证日期,jdbcType=CHAR},
+      终止日期 = #{终止日期,jdbcType=CHAR},
+      邮政编码 = #{邮政编码,jdbcType=CHAR},
+      地址 = #{地址,jdbcType=CHAR},
+      电话 = #{电话,jdbcType=CHAR},
+      email = #{email,jdbcType=CHAR},
+      允借册数 = #{允借册数,jdbcType=INTEGER},
+      借出册数 = #{借出册数,jdbcType=INTEGER},
+      状态位 = #{状态位,jdbcType=CHAR},
+      预约资格 = #{预约资格,jdbcType=BIT},
+      馆际互借 = #{馆际互借,jdbcType=BIT},
+      停借日期 = #{停借日期,jdbcType=CHAR},
+      停借天数 = #{停借天数,jdbcType=INTEGER},
+      图书馆代码 = #{图书馆代码,jdbcType=CHAR},
+      图书馆名称 = #{图书馆名称,jdbcType=CHAR},
+      更新时间 = #{更新时间,jdbcType=TIMESTAMP},
+      身份证号 = #{身份证号,jdbcType=CHAR},
+      职业行业 = #{职业行业,jdbcType=CHAR},
+      文化程度 = #{文化程度,jdbcType=CHAR},
+      业务职称 = #{业务职称,jdbcType=CHAR},
+      备注 = #{备注,jdbcType=CHAR},
+      停借原因 = #{停借原因,jdbcType=CHAR},
+      停借操作员 = #{停借操作员,jdbcType=CHAR},
+      卡号 = #{卡号,jdbcType=CHAR},
+      预借资格 = #{预借资格,jdbcType=BIT},
+      读者签名 = #{读者签名,jdbcType=CHAR},
+      读者流水号 = #{读者流水号,jdbcType=CHAR},
+      SCHOOLID = #{schoolid,jdbcType=NVARCHAR},
+      EDITFLAG = #{editflag,jdbcType=CHAR}
+    where 标识列 = #{标识列,jdbcType=INTEGER}
+  </update>
+</mapper>

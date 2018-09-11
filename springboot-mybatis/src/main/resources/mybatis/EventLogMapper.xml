@@ -1,0 +1,542 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.EventLogMapper">
+    <resultMap id="BaseResultMap" type="com.yh.entity.EventLog">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="sch_id" property="schId" jdbcType="BIGINT"/>
+        <result column="class_id" property="classId" jdbcType="BIGINT"/>
+        <result column="tch_id" property="tchId" jdbcType="BIGINT"/>
+        <result column="stu_id" property="stuId" jdbcType="BIGINT"/>
+        <result column="assess_id" property="assessId" jdbcType="BIGINT"/>
+        <result column="event_category" property="eventCategory" jdbcType="BIGINT"/>
+        <result column="event_location" property="eventLocation" jdbcType="VARCHAR"/>
+        <result column="event_note" property="eventNote" jdbcType="VARCHAR"/>
+        <result column="event_time" property="eventTime" jdbcType="TIMESTAMP"/>
+        <result column="date_day" property="dateDay" jdbcType="INTEGER"/>
+        <result column="status" property="status" jdbcType="TINYINT"/>
+        <!--<result column="push_log" property="pushLog" jdbcType="TINYINT"/>-->
+        <result column="created_dt" property="createdDt" jdbcType="TIMESTAMP"/>
+        <result column="updated_dt" property="updatedDt" jdbcType="TIMESTAMP"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, sch_id, class_id, tch_id, stu_id, assess_id, event_category, event_location, 
+    event_note, event_time, date_day, status, created_dt, updated_dt
+  </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long">
+        select
+        <include refid="Base_Column_List"/>
+        from eval_event_log
+        where id = #{id,jdbcType=BIGINT}
+    </select>
+    <select id="selectByDate" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from eval_event_log
+        where DATE(event_time)= #{date}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from eval_event_log
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+    <insert id="insert" parameterType="com.yh.entity.EventLog">
+    insert into eval_event_log (id, sch_id, class_id, 
+      tch_id, stu_id, assess_id, 
+      event_category, event_location, event_note, 
+      event_time, date_day, status,
+      created_dt, updated_dt)
+    values (#{id,jdbcType=BIGINT}, #{schId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, 
+      #{tchId,jdbcType=BIGINT}, #{stuId,jdbcType=BIGINT}, #{assessId,jdbcType=BIGINT}, 
+      #{eventCategory,jdbcType=BIGINT}, #{eventLocation,jdbcType=VARCHAR}, #{eventNote,jdbcType=VARCHAR}, 
+      #{eventTime,jdbcType=TIMESTAMP}, #{dateDay,jdbcType=INTEGER}, #{status,jdbcType=TINYINT}, #{push_log,jdbcType=TINYINT},
+      #{createdDt,jdbcType=TIMESTAMP}, #{updatedDt,jdbcType=TIMESTAMP})
+  </insert>
+    <insert id="insertSelective" parameterType="com.yh.entity.EventLog">
+        insert into eval_event_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="schId != null">
+                sch_id,
+            </if>
+            <if test="classId != null">
+                class_id,
+            </if>
+            <if test="tchId != null">
+                tch_id,
+            </if>
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="assessId != null">
+                assess_id,
+            </if>
+            <if test="eventCategory != null">
+                event_category,
+            </if>
+            <if test="eventLocation != null">
+                event_location,
+            </if>
+            <if test="eventNote != null">
+                event_note,
+            </if>
+            <if test="eventTime != null">
+                event_time,
+            </if>
+            <if test="dateDay != null">
+                date_day,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <!--<if test="pushLog != null">
+                push_log,
+            </if>-->
+            <if test="createdDt != null">
+                created_dt,
+            </if>
+            <if test="updatedDt != null">
+                updated_dt,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=BIGINT},
+            </if>
+            <if test="schId != null">
+                #{schId,jdbcType=BIGINT},
+            </if>
+            <if test="classId != null">
+                #{classId,jdbcType=BIGINT},
+            </if>
+            <if test="tchId != null">
+                #{tchId,jdbcType=BIGINT},
+            </if>
+            <if test="stuId != null">
+                #{stuId,jdbcType=BIGINT},
+            </if>
+            <if test="assessId != null">
+                #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="eventCategory != null">
+                #{eventCategory,jdbcType=BIGINT},
+            </if>
+            <if test="eventLocation != null">
+                #{eventLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="eventNote != null">
+                #{eventNote,jdbcType=VARCHAR},
+            </if>
+            <if test="eventTime != null">
+                #{eventTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dateDay != null">
+                #{dateDay,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=TINYINT},
+            </if>
+            <!--<if test="pushLog != null">
+                #{push_log,jdbcType=TINYINT},
+            </if>-->
+            <if test="createdDt != null">
+                #{createdDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDt != null">
+                #{updatedDt,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.yh.entity.EventLog">
+        update eval_event_log
+        <set>
+            <if test="schId != null">
+                sch_id = #{schId,jdbcType=BIGINT},
+            </if>
+            <if test="classId != null">
+                class_id = #{classId,jdbcType=BIGINT},
+            </if>
+            <if test="tchId != null">
+                tch_id = #{tchId,jdbcType=BIGINT},
+            </if>
+            <if test="stuId != null">
+                stu_id = #{stuId,jdbcType=BIGINT},
+            </if>
+            <if test="assessId != null">
+                assess_id = #{assessId,jdbcType=BIGINT},
+            </if>
+            <if test="eventCategory != null">
+                event_category = #{eventCategory,jdbcType=BIGINT},
+            </if>
+            <if test="eventLocation != null">
+                event_location = #{eventLocation,jdbcType=VARCHAR},
+            </if>
+            <if test="eventNote != null">
+                event_note = #{eventNote,jdbcType=VARCHAR},
+            </if>
+            <if test="eventTime != null">
+                event_time = #{eventTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="dateDay != null">
+                date_day = #{dateDay,jdbcType=INTEGER},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=TINYINT},
+            </if>
+            <!--<if test="pushLog != null">
+                push_log = #{pushLog,jdbcType=TINYINT},
+            </if>-->
+            <if test="createdDt != null">
+                created_dt = #{createdDt,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatedDt != null">
+                updated_dt = #{updatedDt,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where id = #{id,jdbcType=BIGINT}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.yh.entity.EventLog">
+    update eval_event_log
+    set sch_id = #{schId,jdbcType=BIGINT},
+      class_id = #{classId,jdbcType=BIGINT},
+      tch_id = #{tchId,jdbcType=BIGINT},
+      stu_id = #{stuId,jdbcType=BIGINT},
+      assess_id = #{assessId,jdbcType=BIGINT},
+      event_category = #{eventCategory,jdbcType=BIGINT},
+      event_location = #{eventLocation,jdbcType=VARCHAR},
+      event_note = #{eventNote,jdbcType=VARCHAR},
+      event_time = #{eventTime,jdbcType=TIMESTAMP},
+      date_day = #{dateDay,jdbcType=INTEGER},
+      status = #{status,jdbcType=TINYINT},
+      created_dt = #{createdDt,jdbcType=TIMESTAMP},
+      updated_dt = #{updatedDt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+    <insert id="insertBatch" parameterType="java.util.List">
+        insert into eval_event_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            id,
+            sch_id,
+            class_id,
+            tch_id,
+            stu_id,
+            assess_id,
+            event_category,
+            event_location,
+            event_note,
+            event_time,
+            date_day,
+            status,
+            created_dt,
+            updated_dt
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.id},
+                #{item.schId},
+                #{item.classId},
+                #{item.tchId},
+                #{item.stuId},
+                #{item.assessId},
+                #{item.eventCategory},
+                #{item.eventLocation},
+                #{item.eventNote},
+                #{item.eventTime},
+                #{item.dateDay},
+                #{item.status},
+                #{item.createdDt},
+                #{item.updatedDt}
+            </trim>
+        </foreach>
+    </insert>
+
+    <insert id="insertBatchSelective" parameterType="java.util.List">
+        insert into eval_event_log
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="schId != null">
+                sch_id,
+            </if>
+            <if test="classId != null">
+                class_id,
+            </if>
+            <if test="tchId != null">
+                tch_id,
+            </if>
+            <if test="stuId != null">
+                stu_id,
+            </if>
+            <if test="assessId != null">
+                assess_id,
+            </if>
+            <if test="eventCategory != null">
+                event_category,
+            </if>
+            <if test="eventLocation != null">
+                event_location,
+            </if>
+            <if test="eventNote != null">
+                event_note,
+            </if>
+            <if test="eventTime != null">
+                event_time,
+            </if>
+            <if test="dateDay != null">
+                date_day,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <!--<if test="pushLog != null">
+                push_log,
+            </if>-->
+            <if test="createdDt != null">
+                created_dt,
+            </if>
+            <if test="updatedDt != null">
+                updated_dt,
+            </if>
+        </trim>
+        values
+        <foreach collection="list" item="item" index="index" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">
+                    #{item.id,jdbcType=BIGINT},
+                </if>
+                <if test="schId != null">
+                    #{item.schId,jdbcType=BIGINT},
+                </if>
+                <if test="classId != null">
+                    #{item.classId,jdbcType=BIGINT},
+                </if>
+                <if test="tchId != null">
+                    #{item.tchId,jdbcType=BIGINT},
+                </if>
+                <if test="stuId != null">
+                    #{item.stuId,jdbcType=BIGINT},
+                </if>
+                <if test="assessId != null">
+                    #{item.assessId,jdbcType=BIGINT},
+                </if>
+                <if test="eventCategory != null">
+                    #{item.eventCategory,jdbcType=BIGINT},
+                </if>
+                <if test="eventLocation != null">
+                    #{item.eventLocation,jdbcType=VARCHAR},
+                </if>
+                <if test="eventNote != null">
+                    #{item.eventNote,jdbcType=VARCHAR},
+                </if>
+                <if test="eventTime != null">
+                    #{item.eventTime,jdbcType=TIMESTAMP},
+                </if>
+                <if test="dateDay != null">
+                    #{item.dateDay,jdbcType=INTEGER},
+                </if>
+                <if test="status != null">
+                    #{item.status,jdbcType=TINYINT},
+                </if>
+                <!--<if test="pushLog != null">
+                    #{item.pushLog,jdbcType=TINYINT},
+                </if>-->
+                <if test="createdDt != null">
+                    #{item.createdDt,jdbcType=TIMESTAMP},
+                </if>
+                <if test="updatedDt != null">
+                    #{item.updatedDt,jdbcType=TIMESTAMP},
+                </if>
+            </trim>
+        </foreach>
+    </insert>
+    <!--<resultMap id="eventMap" type="com.yh.entity.wrap.TimeLine">
+        <id column="id" property="id" jdbcType="BIGINT" />
+        <result column="assessId" property="assessId" jdbcType="BIGINT"/>
+        <result column="eventCategory" property="eventCategory" jdbcType="BIGINT"/>
+        <result column="eventLocation" property="eventLocation" jdbcType="VARCHAR"/>
+        <result column="eventNote" property="eventNote" jdbcType="VARCHAR"/>
+        <result column="eventDate" property="eventDate"/>
+        <result column="eventTime" property="eventTime"/>
+        &lt;!&ndash;<collection property="teachers" ofType="com.yh.entity.Teacher">
+            <id column="id" property="id" jdbcType="BIGINT" />
+            <result column="tch_name" property="tchName" jdbcType="VARCHAR" />
+            &lt;!&ndash;<collection property="user" ofType="com.yh.entity.User">
+                <id column="id" property="id" jdbcType="BIGINT"/>
+                <result column="user_type" property="userType" jdbcType="TINYINT"/>
+                <result column="entity_id" property="entityId" jdbcType="BIGINT"/>
+            </collection>&ndash;&gt;
+        </collection>&ndash;&gt;
+        <result column="tchName" property="tchName" jdbcType="VARCHAR" />
+        &lt;!&ndash;<collection property="students" ofType="com.yh.entity.Student">
+            <id column="id" property="id" jdbcType="BIGINT" />
+            <result column="class_id" property="classId" jdbcType="BIGINT" />
+            <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+        </collection>&ndash;&gt;
+        &lt;!&ndash;<collection property="classes" ofType="com.yh.entity.Class">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="class_name" property="className" jdbcType="VARCHAR"/>
+        </collection>&ndash;&gt;
+        <result column="stuName" property="stuName" jdbcType="VARCHAR" />
+        <result column="className" property="className" jdbcType="VARCHAR"/>
+        <result column="tagName" property="tagName" jdbcType="VARCHAR" />
+        <result column="itemName" property="itemName" jdbcType="VARCHAR" />
+        <result column="itemType" property="itemType" jdbcType="TINYINT" />
+        <result column="itemScore" property="itemScore" jdbcType="TINYINT" />
+        &lt;!&ndash;<collection property="logs" ofType="com.yh.entity.AssessLog">
+            <id column="id" property="id" jdbcType="BIGINT"/>
+            <result column="class_id" property="classId" jdbcType="BIGINT"/>
+            <result column="tch_id" property="tchId" jdbcType="BIGINT"/>
+            <result column="stu_id" property="stuId" jdbcType="BIGINT"/>
+            <result column="item_id" property="itemId" jdbcType="BIGINT"/>
+            <result column="tag_id" property="tagId" jdbcType="VARCHAR"/>
+            <result column="assess_type" property="assessType" jdbcType="TINYINT"/>
+            <result column="assess_score" property="assessScore" jdbcType="TINYINT"/>
+            <collection property="tags" ofType="com.yh.entity.wrap.TagItem">
+                <id column="id" property="id" jdbcType="BIGINT" />
+                <result column="tag_id" property="tagId" jdbcType="VARCHAR" />
+                <result column="tag_type" property="tagType" jdbcType="TINYINT" />
+                <result column="tag_name" property="tagName" jdbcType="VARCHAR" />
+                <collection property="items" ofType="com.yh.entity.AssessItem">
+                    <id column="id" property="id" jdbcType="BIGINT" />
+                    <result column="tag_id" property="tagId" jdbcType="VARCHAR" />
+                    <result column="item_name" property="itemName" jdbcType="VARCHAR" />
+                    <result column="item_type" property="itemType" jdbcType="TINYINT" />
+                    <result column="item_score" property="itemScore" jdbcType="TINYINT" />
+                </collection>
+            </collection>
+        </collection>&ndash;&gt;
+    </resultMap>-->
+    <select id="getTimeLine" resultType="com.yh.entity.wrap.TimeLine" >
+        SELECT
+        el.id id,
+        DATE( event_time ) eventDate,
+        DATE_FORMAT( event_time, '%H:%i' ) eventTime,
+        event_location eventLocation,
+        event_note eventNote,
+        t.tch_name tchName,
+        tag.tag_name tagName
+        FROM
+        eval_event_log el
+        INNER JOIN base_teacher t ON t.id = el.tch_id
+        INNER JOIN base_class c ON c.id = el.class_id
+        INNER JOIN base_student stu ON stu.id = el.stu_id
+        INNER JOIN eval_tag tag ON tag.id = el.event_category
+        WHERE
+        DATE(event_time)=#{date} AND el.class_id=#{classId} AND el.stu_id = #{stuId}
+        AND tag.id not in (4,5)
+        AND el.status=0
+        <if test="role == 2 or role == 3">
+            AND el.tch_id=#{tchId}
+        </if>
+        <if test="role == 1 and classId != cid">
+            AND el.tch_id=#{tchId}
+        </if>
+        ORDER BY event_time
+    </select>
+    <select id="getCommon" resultType="com.yh.entity.wrap.TimeLine" >
+        SELECT
+            el.id,
+            DATE( event_time ) eventDate,
+            TIME_FORMAT( event_time, '%H:%i' ) eventTime,
+            event_location eventLocation,
+            event_note eventNote,
+            t.tch_name tchName,
+            tag.tag_name tagName
+        FROM
+            eval_event_log el
+            INNER JOIN eval_tag tag ON tag.id = el.event_category
+            INNER JOIN base_class c ON c.id = el.class_id
+            INNER JOIN base_student stu ON stu.id = el.stu_id
+            INNER JOIN base_teacher t ON t.id = el.tch_id
+        WHERE
+            tag.tag_id IN ( 4,5 )
+            AND DATE ( event_time ) = #{date}
+            AND el.class_id = #{classId}
+            AND el.stu_id = #{stuId}
+            AND el.status=0
+        ORDER BY event_time
+    </select>
+
+    <select id="getCardLog" resultType="com.yh.entity.wrap.TimeLine">
+        SELECT
+            ecl.id,
+            DATE( event_time ) eventDate,
+            TIME_FORMAT( event_time, '%H:%i' ) eventTime,
+	        ecb.location eventLocation,
+            event_note eventNote
+        FROM
+            eval_e_card_log ecl
+            INNER JOIN edu_base_id_pivot bip ON bip.external_id=ecl.card_no
+            INNER JOIN base_student stu ON stu.id = bip.native_id
+	        INNER JOIN base_class c ON c.id = stu.class_id
+	        INNER JOIN base_e_card_bus ecb on ecb.device_no = ecl.event_location
+        WHERE
+            DATE ( event_time ) = #{date}
+            AND c.id = #{classId}
+            AND stu.id = #{stuId}
+            AND ecl.STATUS = 0
+        ORDER BY
+            event_time
+    </select>
+    <select id="selectOtherClass" resultType="com.yh.entity.wrap.TimeLine">
+        SELECT
+            el.id id,
+            DATE( event_time ) eventDate,
+            TIME_FORMAT( event_time, '%H:%i' ) eventTime,
+            stu.stu_enrl_year grade,
+            c.class_no classNo,
+            c.class_name className,
+            event_location eventLocation,
+            event_note eventNote,
+            stu.stu_name stuName,
+            stu.stu_nickname stuNickname,
+            t.tch_name tchName
+        FROM
+            eval_event_log el
+            INNER JOIN base_teacher t ON t.id = el.tch_id
+            INNER JOIN base_class c ON c.id = el.class_id
+            INNER JOIN base_student stu ON stu.id = el.stu_id
+            INNER JOIN eval_tag tag ON tag.id = el.event_category
+        WHERE
+            DATE( event_time ) BETWEEN #{start} AND #{end}
+            AND el.class_id != #{cid}
+            <if test="eventCategory != 4 and eventCategory != 5 and role == 1 and cid != null">
+                AND el.tch_id = #{tchId}
+            </if>
+            AND el.event_category = #{eventCategory}
+            AND el.STATUS = 0
+    </select>
+    <select id="selectByTag" resultType="com.yh.entity.wrap.TimeLine">
+        SELECT
+            el.id id,
+            DATE( event_time ) eventDate,
+            TIME_FORMAT( event_time, '%H:%i' ) eventTime,
+            stu.stu_enrl_year grade,
+            c.class_no classNo,
+            c.class_name className,
+            event_location eventLocation,
+            event_note eventNote,
+            stu.stu_name stuName,
+            stu.stu_nickname stuNickname,
+            t.tch_name tchName
+        FROM
+            eval_event_log el
+            INNER JOIN base_teacher t ON t.id = el.tch_id
+            INNER JOIN base_class c ON c.id = el.class_id
+            INNER JOIN base_student stu ON stu.id = el.stu_id
+            INNER JOIN eval_tag tag ON tag.id = el.event_category
+        WHERE
+            DATE(event_time) BETWEEN #{start} AND #{end}
+            <if test="eventCategory != 4 and eventCategory != 5 and role == 1 and cid != null">
+                AND el.class_id = #{cid}
+            </if>
+            <if test="eventCategory != 4 and eventCategory != 5 and role > 1">
+                AND el.tch_id = #{tchId}
+            </if>
+            AND el.event_category = #{eventCategory}
+            AND el.status=0
+    </select>
+</mapper>

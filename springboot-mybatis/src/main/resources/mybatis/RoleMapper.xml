@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.RoleMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.entity.Role" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="role_id" property="roleId" jdbcType="VARCHAR" />
+    <result column="role_name" property="roleName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_dt" property="createdDt" jdbcType="TIMESTAMP" />
+    <result column="updated_dt" property="updatedDt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, role_id, role_name, status, created_dt, updated_dt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from sys_role
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yh.entity.Role" >
+    insert into sys_role (id, role_id, role_name, 
+      status, created_dt, updated_dt
+      )
+    values (#{id,jdbcType=BIGINT}, #{roleId,jdbcType=VARCHAR}, #{roleName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createdDt,jdbcType=TIMESTAMP}, #{updatedDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.entity.Role" >
+    insert into sys_role
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="roleId != null" >
+        role_id,
+      </if>
+      <if test="roleName != null" >
+        role_name,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdDt != null" >
+        created_dt,
+      </if>
+      <if test="updatedDt != null" >
+        updated_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="roleId != null" >
+        #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdDt != null" >
+        #{createdDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDt != null" >
+        #{updatedDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.entity.Role" >
+    update sys_role
+    <set >
+      <if test="roleId != null" >
+        role_id = #{roleId,jdbcType=VARCHAR},
+      </if>
+      <if test="roleName != null" >
+        role_name = #{roleName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdDt != null" >
+        created_dt = #{createdDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDt != null" >
+        updated_dt = #{updatedDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.entity.Role" >
+    update sys_role
+    set role_id = #{roleId,jdbcType=VARCHAR},
+      role_name = #{roleName,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_dt = #{createdDt,jdbcType=TIMESTAMP},
+      updated_dt = #{updatedDt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <!--<select id="getUserClassRole" resultType="java.lang.Integer">
+    SELECT
+        r.id
+    FROM
+        sys_role r
+        INNER JOIN sys_user_role ur ON r.role_id = ur.role_id
+        INNER JOIN sys_user u ON u.user_id = ur.user_id
+        INNER JOIN base_teacher_agenda ta ON u.entity_id = ta.tch_id
+        INNER JOIN base_teacher t ON ta.tch_id = t.id
+    WHERE
+        ta.tch_id = #{tchId}
+        AND ur.status=0
+        AND ta.status=0
+  </select>-->
+</mapper>

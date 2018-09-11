@@ -1,0 +1,78 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8" /><title>筑桥生活报告</title></head>
+<body><script src="https://cdnjs.cloudflare.com/ajax/libs/echarts/4.1.0/echarts.common.min.js" type="text/javascript" charset="utf-8"></script>
+<style type="text/css">
+    body {background: #fffff;font-size: 12px;color: #353535;}
+    p{line-height: 20px;margin: 0;margin-top: 15px;}
+    progress {position: absolute;right: 50px;top: 5px;width: 55%;height: 8px;margin: 0px auto;display: inline-block;-webkit-appearance: none;border: none;}
+    progress::-webkit-progress-bar {background: #f6f6f6;border-radius: 50px;padding: 0px;}
+    progress::-webkit-progress-value {border-radius: 50px;background: cadetblue;}
+    .type0{color: #89c12f;}.fir0::-webkit-progress-value{background: #89c12f;}
+    .fir_0::-webkit-progress-value{background: #b8da82;}
+    .type1{color: #f58023;}
+    .fir1::-webkit-progress-value{background: #f58023;}
+    .fir_1::-webkit-progress-value{background: #f9b37b;}
+    .type2{color: #25308e;}
+    .fir2::-webkit-progress-value{background: #25308e;}
+    .fir_2::-webkit-progress-value{background: #7c83bb;}
+    .power0{color: #5f2d89;}
+    .sec0::-webkit-progress-value{background: #5f2d89;}
+    .sec_0::-webkit-progress-value{background: #9f81b8;}
+    .power1{color: #e72f30;}
+    .sec1::-webkit-progress-value{background: #e72f30;}
+    .sec_1::-webkit-progress-value{background: #f18283;}
+</style>
+<div id="all" class="all" style="margin:0px 14px;">
+    <div>
+        <p style="font-size: 16px;color: #333333;">尊敬的家长，以下是 ###stuName### 同学的###title###。</p>
+        <div id="report">
+            <div style="margin-bottom:40px" class="type0"><p style="font-weight:bold; font-size:16px;margin-bottom:10px">请假次数</p >
+                <div style="position:relative"><span>您的孩子</span><progress class="fir0" value="###absent###" max="###absentMax###"></progress><span style="position:absolute;right:10px">  ###absent### 次</span></div>
+                <div style="position:relative"><span>全校平均数</span><progress class="fir_0" value="###absentAvg###" max="###absentMax###"></progress><span style="position:absolute;right:10px">###absentAvg### 次</span></div>
+            </div>
+            <div style="margin-bottom:40px" class="type1"><p style="font-weight:bold; font-size:16px;margin-bottom:10px">迟到次数</p >
+                <div style="position:relative"><span>您的孩子</span><progress class="fir1" value="###late###" max="###lateMax###"></progress><span style="position:absolute;right:5px">###late### 次</span></div>
+                <div style="position:relative"><span>全校平均数</span><progress class="fir_1" value="###lateAvg###" max="###lateMax###"></progress><span style="position:absolute;right:5px">###lateAvg### 次</span></div>
+            </div>
+            <div style="margin-bottom:40px" class="type2"><p style="font-weight:bold; font-size:16px;margin-bottom:10px">图书借阅</p>
+                <div style="position:relative"><span>您的孩子</span><progress class="fir2" value="###books###" max="###bookMax###"></progress><span style="position:absolute;right:5px">###books### 次</span></div>
+                <div style="position:relative"><span>全校平均数</span> <progress class="fir_2" value="###bookAvg###" max="###bookMax###"></progress><span style="position:absolute;right:5px">###bookAvg### 次</span></div>
+            </div>
+            <div style="margin-bottom:40px" class="power0"><p style="font-weight:bold;font-size:16px;margin-bottom:10px">能量站</p>
+                <div style="position:relative"><span>鼓励</span><progress class="sec0" value="###award###" max="###awardMax###"></progress><span style="position:absolute;right:5px">###award### 次</span></div>
+                <div style="position:relative"><span>全校平均数</span><progress class="sec_0" value="###awardAvg###" max="###awardMax###"></progress><span style="position:absolute;right:5px">###awardAvg### 次</span></div>
+            </div>
+            <div style="margin-bottom:40px" class="power1"><p style="font-weight:bold;font-size:16px;margin-bottom:10px"></p>
+                <div style="position:relative"><span>提醒</span><progress class="sec1" value="###deduct###" max="###deductMax###"></progress><span style="position:absolute;right:5px">###deduct### 次</span></div>
+                <div style="position:relative"><span>全校平均数</span><progress class="sec_1" value="###deductAvg###" max="###deductMax###"></progress><span style="position:absolute;right:5px">###deductAvg### 次</span></div>
+            </div>
+        </div>
+        <div style="margin-top: 40px;text-align: center;">
+            <div id="main" style="width:100%;height:300px;"></div>
+        </div>
+    </div>
+    <p style="margin-bottom: 30px;font-size: 16px;text-align: left;">请继续加油，祝您的孩子在筑桥茁壮成长。</p>
+</div></body></html>
+<script type="text/javascript">
+    window.onload=function () {
+        var myChart = echarts.init(document.getElementById('main'));
+        option = {
+            title: {
+                text: '兴趣选课',
+                x: 'left'
+            },
+            tooltip : {
+                trigger: 'item',
+                formatter: "{a} <br/>{b} : {c}"
+            },
+            color: ['#b8da82', '#f9b37b', '#7c83bb', '#9f81b8', '#f18283', '#fbf581', '#9adaf7', '#ed87b9', '#d5ebe1'],
+            series: [{
+                name: '签到次数',
+                type: 'pie',
+                radius: '50%',
+                center: ['50%', '60%'],
+                data: ['###sign###']
+            }]
+        };
+        myChart.setOption(option);
+    }
+</script>

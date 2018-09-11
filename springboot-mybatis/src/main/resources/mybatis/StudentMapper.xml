@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yh.mapper.StudentMapper" >
+  <resultMap id="BaseResultMap" type="com.yh.entity.Student" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="sch_id" property="schId" jdbcType="BIGINT" />
+    <result column="class_id" property="classId" jdbcType="BIGINT" />
+    <result column="stu_no" property="stuNo" jdbcType="VARCHAR" />
+    <result column="stu_name" property="stuName" jdbcType="VARCHAR" />
+    <result column="stu_nickname" property="stuNickname" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="TINYINT" />
+    <result column="stu_enrl_year" property="stuEnrlYear" jdbcType="SMALLINT" />
+    <result column="stu_icon" property="stuIcon" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="TINYINT" />
+    <result column="created_dt" property="createdDt" jdbcType="TIMESTAMP" />
+    <result column="updated_dt" property="updatedDt" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, sch_id, class_id, stu_no, stu_name, stu_nickname, gender, stu_enrl_year, stu_icon, 
+    status, created_dt, updated_dt
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    from base_student
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from base_student
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <insert id="insert" parameterType="com.yh.entity.Student" >
+    insert into base_student (id, sch_id, class_id, 
+      stu_no, stu_name, stu_nickname, 
+      gender, stu_enrl_year, stu_icon, 
+      status, created_dt, updated_dt
+      )
+    values (#{id,jdbcType=BIGINT}, #{schId,jdbcType=BIGINT}, #{classId,jdbcType=BIGINT}, 
+      #{stuNo,jdbcType=VARCHAR}, #{stuName,jdbcType=VARCHAR}, #{stuNickname,jdbcType=VARCHAR}, 
+      #{gender,jdbcType=TINYINT}, #{stuEnrlYear,jdbcType=SMALLINT}, #{stuIcon,jdbcType=VARCHAR}, 
+      #{status,jdbcType=TINYINT}, #{createdDt,jdbcType=TIMESTAMP}, #{updatedDt,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.yh.entity.Student" >
+    insert into base_student
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="schId != null" >
+        sch_id,
+      </if>
+      <if test="classId != null" >
+        class_id,
+      </if>
+      <if test="stuNo != null" >
+        stu_no,
+      </if>
+      <if test="stuName != null" >
+        stu_name,
+      </if>
+      <if test="stuNickname != null" >
+        stu_nickname,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="stuEnrlYear != null" >
+        stu_enrl_year,
+      </if>
+      <if test="stuIcon != null" >
+        stu_icon,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createdDt != null" >
+        created_dt,
+      </if>
+      <if test="updatedDt != null" >
+        updated_dt,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="schId != null" >
+        #{schId,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null" >
+        #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="stuNo != null" >
+        #{stuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuNickname != null" >
+        #{stuNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="stuEnrlYear != null" >
+        #{stuEnrlYear,jdbcType=SMALLINT},
+      </if>
+      <if test="stuIcon != null" >
+        #{stuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdDt != null" >
+        #{createdDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDt != null" >
+        #{updatedDt,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.yh.entity.Student" >
+    update base_student
+    <set >
+      <if test="schId != null" >
+        sch_id = #{schId,jdbcType=BIGINT},
+      </if>
+      <if test="classId != null" >
+        class_id = #{classId,jdbcType=BIGINT},
+      </if>
+      <if test="stuNo != null" >
+        stu_no = #{stuNo,jdbcType=VARCHAR},
+      </if>
+      <if test="stuName != null" >
+        stu_name = #{stuName,jdbcType=VARCHAR},
+      </if>
+      <if test="stuNickname != null" >
+        stu_nickname = #{stuNickname,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=TINYINT},
+      </if>
+      <if test="stuEnrlYear != null" >
+        stu_enrl_year = #{stuEnrlYear,jdbcType=SMALLINT},
+      </if>
+      <if test="stuIcon != null" >
+        stu_icon = #{stuIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=TINYINT},
+      </if>
+      <if test="createdDt != null" >
+        created_dt = #{createdDt,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatedDt != null" >
+        updated_dt = #{updatedDt,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.yh.entity.Student" >
+    update base_student
+    set sch_id = #{schId,jdbcType=BIGINT},
+      class_id = #{classId,jdbcType=BIGINT},
+      stu_no = #{stuNo,jdbcType=VARCHAR},
+      stu_name = #{stuName,jdbcType=VARCHAR},
+      stu_nickname = #{stuNickname,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=TINYINT},
+      stu_enrl_year = #{stuEnrlYear,jdbcType=SMALLINT},
+      stu_icon = #{stuIcon,jdbcType=VARCHAR},
+      status = #{status,jdbcType=TINYINT},
+      created_dt = #{createdDt,jdbcType=TIMESTAMP},
+      updated_dt = #{updatedDt,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <select id="countStu" resultType="java.lang.Integer">
+    SELECT
+        count( id )
+    FROM
+        base_student
+    WHERE
+        stu_enrl_year = #{classYear,jdbcType=SMALLINT}
+        AND STATUS =0
+  </select>
+</mapper>
